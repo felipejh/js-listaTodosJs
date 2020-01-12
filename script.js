@@ -2,11 +2,7 @@ var lista = document.getElementById("listId");
 var inputElement = document.getElementById("input");
 var btnAdicionar = document.getElementById("btnAdicionar");
 
-var todos = [
-    "Fazer café",
-    "Estudar Javascript",
-    "Acessar Github"
-]
+var todos = JSON.parse(localStorage.getItem('lista_todos')) || [];
 
 function renderTodos() {
 
@@ -40,12 +36,18 @@ function addTodos() {
 
     inputElement.value = null;
     renderTodos();
+    saveToStorage();
 
 }
 
 function deleteTodo(pos) {
     todos.splice(pos, 1);
     renderTodos();
+    saveToStorage();
+}
+
+function saveToStorage(){
+    localStorage.setItem('lista_todos', JSON.stringify(todos));
 }
 
 renderTodos();
